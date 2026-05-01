@@ -1,0 +1,29 @@
+---
+import type { i18n } from '../types';
+
+interface Props {
+  t: i18n;
+}
+
+const { t } = Astro.props;
+
+const agents = [
+  'Claude Code', 'Cursor', 'Codex', 'Gemini CLI',
+  'Windsurf', 'Cline', 'Aider', 'Copilot',
+  'Continue', 'OpenCode', 'Zed', 'Amp',
+];
+---
+
+<section class="py-16 md:py-24">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold mb-12">{t.agentsTitle}</h2>
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+      {agents.map(name => (
+        <div class="bg-[var(--color-surface)] rounded-lg border border-[var(--color-outline)] px-3 py-4 text-sm text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] hover:border-[var(--color-accent)] transition-colors">
+          {name}
+        </div>
+      ))}
+    </div>
+    <p class="mt-6 text-sm text-[var(--color-secondary)]">+ 35 more</p>
+  </div>
+</section>

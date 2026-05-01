@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0B0D1A;
+  --color-surface: #141829;
+  --color-on-surface: #FFFFFF;
+  --color-secondary: #B8C0D0;
+  --color-accent: #6366F1;
+  --color-accent-hover: #818CF8;
+  --color-outline: #1E2440;
+
+  --color-light-bg: #F8F9FC;
+  --color-light-surface: #FFFFFF;
+  --color-light-on-surface: #0F172A;
+  --color-light-secondary: #64748B;
+  --color-light-accent: #4F46E5;
+  --color-light-accent-hover: #6366F1;
+  --color-light-outline: #E2E8F0;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Light mode overrides */
+.light {
+  --color-bg: var(--color-light-bg);
+  --color-surface: var(--color-light-surface);
+  --color-on-surface: var(--color-light-on-surface);
+  --color-secondary: var(--color-light-secondary);
+  --color-accent: var(--color-light-accent);
+  --color-accent-hover: var(--color-light-accent-hover);
+  --color-outline: var(--color-light-outline);
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-on-surface);
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Theme toggle icon visibility */
+.dark-icon { display: none; }
+.light-icon { display: block; }
+.light .dark-icon { display: block; }
+.light .light-icon { display: none; }
+
+/* Copy button animation */
+@keyframes copied {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-copied {
+  animation: copied 0.6s ease-in-out;
+}

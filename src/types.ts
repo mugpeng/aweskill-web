@@ -1,0 +1,33 @@
+export interface i18n {
+  lang: string;
+  langLabel: string;
+  langSwitch: string;
+  langSwitchHref: string;
+  title: string;
+  subtitle: string;
+  heroDesc: string;
+  humanLabel: string;
+  aiLabel: string;
+  humanInstall: string;
+  aiInstall: string;
+  badgeVersion: string;
+  badgeNode: string;
+  badgeLicense: string;
+  badgeAgents: string;
+  featuresTitle: string;
+  featureInstallTitle: string;
+  featureInstallDesc: string;
+  featureBundleTitle: string;
+  featureBundleDesc: string;
+  featureProjectTitle: string;
+  featureProjectDesc: string;
+  featureDoctorTitle: string;
+  featureDoctorDesc: string;
+  agentsTitle: string;
+  footerGitHub: string;
+  footernpm: string;
+  footerLicense: string;
+  footerReadme: string;
+  copyButton: string;
+  copiedButton: string;
+}

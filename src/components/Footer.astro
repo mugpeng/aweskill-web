@@ -1,0 +1,18 @@
+---
+import type { i18n } from '../types';
+
+interface Props {
+  t: i18n;
+}
+
+const { t } = Astro.props;
+---
+
+<footer class="border-t border-[var(--color-outline)] py-8">
+  <div class="max-w-6xl mx-auto px-6 flex flex-wrap justify-center gap-6 text-sm text-[var(--color-secondary)]">
+    <a href="https://github.com/mugpeng/aweskill" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerGitHub}</a>
+    <a href="https://www.npmjs.com/package/aweskill" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footernpm}</a>
+    <a href="https://github.com/mugpeng/aweskill/blob/main/LICENSE" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerLicense}</a>
+    <a href="https://github.com/mugpeng/aweskill/blob/main/README.md" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerReadme}</a>
+  </div>
+</footer>

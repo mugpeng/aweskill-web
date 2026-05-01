@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import Agents from '../../components/Agents.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import t from '../../i18n/zh.json';
+---
+
+<Layout lang="zh" title="aweskill — AI Agent 的技能包管理器" description="CLI 优先的技能包管理器，AI Agent 可自行操作。一次安装，多个编码工具共享。">
+  <Header t={t} />
+  <main>
+    <Hero t={t} />
+    <Features t={t} />
+    <Agents t={t} />
+  </main>
+  <Footer t={t} />
+</Layout>

@@ -1,0 +1,31 @@
+---
+import type { i18n } from '../types';
+
+interface Props {
+  t: i18n;
+}
+
+const { t } = Astro.props;
+
+const features = [
+  { icon: '>', title: t.featureInstallTitle, desc: t.featureInstallDesc },
+  { icon: '{}', title: t.featureBundleTitle, desc: t.featureBundleDesc },
+  { icon: '~>', title: t.featureProjectTitle, desc: t.featureProjectDesc },
+  { icon: '+', title: t.featureDoctorTitle, desc: t.featureDoctorDesc },
+];
+---
+
+<section class="py-16 md:py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-2xl md:text-3xl font-semibold text-center mb-12">{t.featuresTitle}</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {features.map(f => (
+        <div class="bg-[var(--color-surface)] rounded-xl border border-[var(--color-outline)] p-6">
+          <div class="font-mono text-lg text-[var(--color-accent)] mb-3">{f.icon}</div>
+          <h3 class="font-semibold mb-2">{f.title}</h3>
+          <p class="text-sm text-[var(--color-secondary)]">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
