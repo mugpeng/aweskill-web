@@ -15,15 +15,15 @@ const features = [
 ];
 ---
 
-<section class="py-16 md:py-24">
+<section class="py-20 md:py-28">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-2xl md:text-3xl font-semibold text-center mb-12">{t.featuresTitle}</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-16">{t.featuresTitle}</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {features.map(f => (
-        <div class="bg-[var(--color-surface)] rounded-xl border border-[var(--color-outline)] p-6">
-          <div class="font-mono text-lg text-[var(--color-accent)] mb-3">{f.icon}</div>
-          <h3 class="font-semibold mb-2">{f.title}</h3>
-          <p class="text-sm text-[var(--color-secondary)]">{f.desc}</p>
+        <div class="glow-card scanline-overlay p-7">
+          <div class="font-mono text-2xl text-[var(--color-accent)] mb-4">{f.icon}</div>
+          <h3 class="text-lg font-semibold mb-2 text-[var(--color-on-surface)]">{f.title}</h3>
+          <p class="text-base text-[var(--color-secondary)] leading-relaxed">{f.desc}</p>
         </div>
       ))}
     </div>

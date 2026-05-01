@@ -14,16 +14,16 @@ const agents = [
 ];
 ---
 
-<section class="py-16 md:py-24">
+<section class="py-20 md:py-28">
   <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-2xl md:text-3xl font-semibold mb-12">{t.agentsTitle}</h2>
-    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-16">{t.agentsTitle}</h2>
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
       {agents.map(name => (
-        <div class="bg-[var(--color-surface)] rounded-lg border border-[var(--color-outline)] px-3 py-4 text-sm text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] hover:border-[var(--color-accent)] transition-colors">
+        <div class="glow-card px-4 py-5 text-base font-medium text-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-colors cursor-default">
           {name}
         </div>
       ))}
     </div>
-    <p class="mt-6 text-sm text-[var(--color-secondary)]">+ 35 more</p>
+    <p class="mt-8 text-base text-[var(--color-secondary)]">+ 35 more</p>
   </div>
 </section>

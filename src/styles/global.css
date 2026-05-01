@@ -1,58 +1,329 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0B0D1A;
-  --color-surface: #141829;
-  --color-on-surface: #FFFFFF;
-  --color-secondary: #B8C0D0;
-  --color-accent: #6366F1;
-  --color-accent-hover: #818CF8;
-  --color-outline: #1E2440;
+  /* ── Colors ── */
+  --color-bg: #080a14;
+  --color-surface: #0e1225;
+  --color-surface-elevated: #141a30;
+  --color-on-surface: #f0f2f8;
+  --color-secondary: #8892b0;
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+  --color-outline: #1a2040;
+  --color-glow-cyan: #22d3ee;
+  --color-glow-teal: #2dd4bf;
+  --color-glow-indigo: #818cf8;
 
-  --color-light-bg: #F8F9FC;
-  --color-light-surface: #FFFFFF;
-  --color-light-on-surface: #0F172A;
-  --color-light-secondary: #64748B;
-  --color-light-accent: #4F46E5;
-  --color-light-accent-hover: #6366F1;
-  --color-light-outline: #E2E8F0;
+  --color-light-bg: #f8f9fc;
+  --color-light-surface: #ffffff;
+  --color-light-on-surface: #0f172a;
+  --color-light-secondary: #64748b;
+  --color-light-accent: #4f46e5;
+  --color-light-accent-hover: #6366f1;
+  --color-light-outline: #e2e8f0;
 
-  --font-sans: "Inter", system-ui, sans-serif;
+  /* ── Typography ── */
+  --font-sans: "Sora", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
-/* Light mode overrides */
+/* ══════════════════════════════════════════
+   Light mode overrides
+   ══════════════════════════════════════════ */
 .light {
   --color-bg: var(--color-light-bg);
   --color-surface: var(--color-light-surface);
+  --color-surface-elevated: #f1f5f9;
   --color-on-surface: var(--color-light-on-surface);
   --color-secondary: var(--color-light-secondary);
   --color-accent: var(--color-light-accent);
   --color-accent-hover: var(--color-light-accent-hover);
   --color-outline: var(--color-light-outline);
+  --color-glow-cyan: #0891b2;
+  --color-glow-teal: #0d9488;
+  --color-glow-indigo: #6366f1;
 }
 
+/* ══════════════════════════════════════════
+   Base
+   ══════════════════════════════════════════ */
 html {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   min-height: 100vh;
+  position: relative;
 }
 
-/* Theme toggle icon visibility */
+/* ══════════════════════════════════════════
+   Background grid atmosphere
+   ══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.light body::before {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+}
+
+/* Top-center radial glow */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(34, 211, 238, 0.06) 0%,
+    rgba(99, 102, 241, 0.04) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.light body::after {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(34, 211, 238, 0.04) 30%,
+    transparent 70%
+  );
+}
+
+/* ══════════════════════════════════════════
+   Theme toggle icon visibility
+   ══════════════════════════════════════════ */
 .dark-icon { display: none; }
 .light-icon { display: block; }
 .light .dark-icon { display: block; }
 .light .light-icon { display: none; }
 
-/* Copy button animation */
+/* ══════════════════════════════════════════
+   Copy button animation
+   ══════════════════════════════════════════ */
 @keyframes copied {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
 .animate-copied {
   animation: copied 0.6s ease-in-out;
+}
+
+/* ══════════════════════════════════════════
+   Glow card — used by Features, Agents
+   ══════════════════════════════════════════ */
+.glow-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline);
+  border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glow-card:hover {
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.08),
+    0 0 40px rgba(34, 211, 238, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transform: translateY(-2px);
+}
+
+.light .glow-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow:
+    0 0 20px rgba(99, 102, 241, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Corner brackets decoration */
+.glow-card::before,
+.glow-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(34, 211, 238, 0.25);
+  border-style: solid;
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+}
+
+.glow-card::before {
+  top: 8px;
+  left: 8px;
+  border-width: 1px 0 0 1px;
+}
+
+.glow-card::after {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 1px 1px 0;
+}
+
+.glow-card:hover::before,
+.glow-card:hover::after {
+  border-color: rgba(34, 211, 238, 0.5);
+}
+
+.light .glow-card::before,
+.light .glow-card::after {
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.light .glow-card:hover::before,
+.light .glow-card:hover::after {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* ══════════════════════════════════════════
+   Terminal install box
+   ══════════════════════════════════════════ */
+.terminal-box {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.terminal-box:hover {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.06);
+}
+
+.light .terminal-box:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-outline);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.light .terminal-header {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.terminal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.terminal-dot--red { background: #ef4444; opacity: 0.7; }
+.terminal-dot--yellow { background: #eab308; opacity: 0.7; }
+.terminal-dot--green { background: #22c55e; opacity: 0.7; }
+
+.terminal-body {
+  padding: 16px 20px;
+}
+
+/* ══════════════════════════════════════════
+   Pulse dot animation
+   ══════════════════════════════════════════ */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════
+   Scanline effect — applied as background
+   overlay on glow-card (avoids ::before conflict)
+   ══════════════════════════════════════════ */
+.glow-card.scanline-overlay {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(34, 211, 238, 0.015) 2px,
+      rgba(34, 211, 238, 0.015) 4px
+    ),
+    linear-gradient(var(--color-surface), var(--color-surface));
+}
+
+.light .glow-card.scanline-overlay {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(99, 102, 241, 0.02) 2px,
+      rgba(99, 102, 241, 0.02) 4px
+    ),
+    linear-gradient(var(--color-surface), var(--color-surface));
+}
+
+/* ══════════════════════════════════════════
+   Glow text
+   ══════════════════════════════════════════ */
+.text-glow-cyan {
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+.light .text-glow-cyan {
+  text-shadow: none;
+}
+
+/* ══════════════════════════════════════════
+   GitHub star button
+   ══════════════════════════════════════════ */
+@keyframes star-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  50% { box-shadow: 0 0 16px 2px rgba(99, 102, 241, 0.12); }
+}
+
+.github-star-btn {
+  animation: star-breathe 3s ease-in-out infinite;
+}
+
+.github-star-btn:hover {
+  animation: none;
+}
+
+/* ══════════════════════════════════════════
+   Gradient text
+   ══════════════════════════════════════════ */
+.text-gradient-hero {
+  background: linear-gradient(135deg, #f0f2f8 0%, #22d3ee 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.light .text-gradient-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #0891b2 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

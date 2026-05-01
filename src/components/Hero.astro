@@ -8,33 +8,54 @@ interface Props {
 const { t } = Astro.props;
 ---
 
-<section class="pt-20 pb-16 md:pt-32 md:pb-24">
+<section class="pt-24 pb-20 md:pt-36 md:pb-28">
   <div class="max-w-6xl mx-auto px-6 text-center">
-    <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">{t.title}</h1>
-    <p class="text-lg md:text-xl text-[var(--color-secondary)] mb-6 max-w-2xl mx-auto">{t.subtitle}</p>
-    <p class="text-sm text-[var(--color-secondary)] mb-12 max-w-xl mx-auto">{t.heroDesc}</p>
+    <!-- Title logo -->
+    <div class="flex justify-center mb-8">
+      <img src="/logo-full.png" alt="aweskill" class="w-80 md:w-[28rem] lg:w-[36rem] h-auto" />
+    </div>
+
+    <!-- Subtitle -->
+    <p class="text-xl md:text-2xl lg:text-3xl font-medium text-[var(--color-on-surface)] mb-4">{t.subtitle}</p>
+
+    <!-- Description -->
+    <p class="text-base md:text-lg text-[var(--color-secondary)] mb-14 max-w-2xl mx-auto leading-relaxed">{t.heroDesc}</p>
 
     <!-- Install boxes -->
-    <div class="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
+    <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto mb-12">
       <!-- Human install -->
-      <div class="bg-[var(--color-surface)] rounded-xl border border-[var(--color-outline)] p-5 text-left">
-        <div class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-3">{t.humanLabel}</div>
-        <div class="flex items-center justify-between bg-[var(--color-bg)] rounded-lg px-4 py-3">
-          <code class="font-mono text-sm text-[var(--color-on-surface)] whitespace-nowrap overflow-x-auto">{t.humanInstall}</code>
+      <div class="terminal-box text-left">
+        <div class="terminal-header">
+          <span class="terminal-dot terminal-dot--red"></span>
+          <span class="terminal-dot terminal-dot--yellow"></span>
+          <span class="terminal-dot terminal-dot--green"></span>
+          <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.humanLabel}</span>
+        </div>
+        <div class="terminal-body flex items-center justify-between gap-3">
+          <code class="font-mono text-sm md:text-base text-[var(--color-on-surface)] whitespace-nowrap overflow-x-auto">
+            <span class="text-[var(--color-secondary)] mr-1">$</span>{t.humanInstall}
+          </code>
           <button
-            class="ml-3 shrink-0 text-xs text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors copy-btn"
+            class="shrink-0 text-xs md:text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors copy-btn px-2 py-1 rounded border border-[var(--color-outline)] hover:border-[var(--color-accent)]/30"
             data-copy={t.humanInstall}
           >{t.copyButton}</button>
         </div>
       </div>
 
       <!-- AI install -->
-      <div class="bg-[var(--color-surface)] rounded-xl border border-[var(--color-outline)] p-5 text-left">
-        <div class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-3">{t.aiLabel}</div>
-        <div class="flex items-start justify-between bg-[var(--color-bg)] rounded-lg px-4 py-3">
-          <code class="font-mono text-xs leading-relaxed text-[var(--color-on-surface)] break-all">{t.aiInstall}</code>
+      <div class="terminal-box text-left">
+        <div class="terminal-header">
+          <span class="terminal-dot terminal-dot--red"></span>
+          <span class="terminal-dot terminal-dot--yellow"></span>
+          <span class="terminal-dot terminal-dot--green"></span>
+          <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.aiLabel}</span>
+        </div>
+        <div class="terminal-body flex items-start justify-between gap-3">
+          <code class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-on-surface)] break-all">
+            <span class="text-[var(--color-secondary)] mr-1">$</span>{t.aiInstall}
+          </code>
           <button
-            class="ml-3 shrink-0 text-xs text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors copy-btn"
+            class="shrink-0 text-xs md:text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors copy-btn px-2 py-1 rounded border border-[var(--color-outline)] hover:border-[var(--color-accent)]/30"
             data-copy={t.aiInstall}
           >{t.copyButton}</button>
         </div>
@@ -42,11 +63,11 @@ const { t } = Astro.props;
     </div>
 
     <!-- Badges -->
-    <div class="flex flex-wrap justify-center gap-2 text-xs">
-      <span class="px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-secondary)]">{t.badgeVersion}</span>
-      <span class="px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-secondary)]">{t.badgeNode}</span>
-      <span class="px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-secondary)]">{t.badgeLicense}</span>
-      <span class="px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-secondary)]">{t.badgeAgents}</span>
+    <div class="flex flex-wrap justify-center gap-3 text-sm">
+      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeVersion}</span>
+      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeNode}</span>
+      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-secondary)] font-mono font-medium">{t.badgeLicense}</span>
+      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeAgents}</span>
     </div>
   </div>
 </section>
