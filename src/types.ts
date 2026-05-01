@@ -4,8 +4,15 @@ export interface i18n {
   langSwitch: string;
   langSwitchHref: string;
   title: string;
+  heroEyebrow: string;
   subtitle: string;
   heroDesc: string;
+  heroPanelTitle: string;
+  heroPanelBundle: string;
+  heroPanelSkills: string;
+  heroPanelAgents: string;
+  heroPanelLatency: string;
+  agentsCaption: string;
   humanLabel: string;
   aiLabel: string;
   humanInstall: string;

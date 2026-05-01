@@ -8,10 +8,10 @@ interface Props {
 const { t } = Astro.props;
 
 const features = [
-  { icon: '>', title: t.featureInstallTitle, desc: t.featureInstallDesc },
-  { icon: '{}', title: t.featureBundleTitle, desc: t.featureBundleDesc },
-  { icon: '~>', title: t.featureProjectTitle, desc: t.featureProjectDesc },
-  { icon: '+', title: t.featureDoctorTitle, desc: t.featureDoctorDesc },
+  { id: 'install', title: t.featureInstallTitle, desc: t.featureInstallDesc },
+  { id: 'bundle', title: t.featureBundleTitle, desc: t.featureBundleDesc },
+  { id: 'project', title: t.featureProjectTitle, desc: t.featureProjectDesc },
+  { id: 'doctor', title: t.featureDoctorTitle, desc: t.featureDoctorDesc },
 ];
 ---
 
@@ -20,8 +20,39 @@ const features = [
     <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-16">{t.featuresTitle}</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {features.map(f => (
-        <div class="glow-card scanline-overlay p-7">
-          <div class="font-mono text-2xl text-[var(--color-accent)] mb-4">{f.icon}</div>
+        <div class="glow-card scanline-overlay feature-card p-7">
+          <div class="feature-icon mb-5">
+            {f.id === 'install' && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v10"></path>
+                <path d="m7 9 5 5 5-5"></path>
+                <path d="M5 19h14"></path>
+              </svg>
+            )}
+            {f.id === 'bundle' && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 4 7l8 4 8-4-8-4Z"></path>
+                <path d="M4 12l8 4 8-4"></path>
+                <path d="M4 17l8 4 8-4"></path>
+              </svg>
+            )}
+            {f.id === 'project' && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h5"></path>
+                <path d="M14 7h5"></path>
+                <path d="M14 17h5"></path>
+                <path d="M10 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>
+                <path d="M14 12V7"></path>
+                <path d="M14 12v5"></path>
+              </svg>
+            )}
+            {f.id === 'doctor' && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 4 7v5c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10V7l-8-4Z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            )}
+          </div>
           <h3 class="text-lg font-semibold mb-2 text-[var(--color-on-surface)]">{f.title}</h3>
           <p class="text-base text-[var(--color-secondary)] leading-relaxed">{f.desc}</p>
         </div>

@@ -17,13 +17,18 @@ const agents = [
 <section class="py-20 md:py-28">
   <div class="max-w-6xl mx-auto px-6 text-center">
     <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-16">{t.agentsTitle}</h2>
-    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
-      {agents.map(name => (
-        <div class="glow-card px-4 py-5 text-base font-medium text-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-colors cursor-default">
-          {name}
+    <p class="text-base md:text-lg text-[var(--color-secondary)] max-w-2xl mx-auto mb-10">{t.agentsCaption}</p>
+    <div class="agent-grid">
+      {agents.map((name, index) => (
+        <div class={`glow-card agent-chip agent-chip--${index % 4}`} >
+          <span class="agent-chip__signal"></span>
+          <span>{name}</span>
         </div>
       ))}
     </div>
-    <p class="mt-8 text-base text-[var(--color-secondary)]">+ 35 more</p>
+    <div class="agent-summary mt-8">
+      <span class="agent-summary__pill">live links</span>
+      <span class="agent-summary__copy">+ 35 more environments available</span>
+    </div>
   </div>
 </section>

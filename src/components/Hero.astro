@@ -9,65 +9,146 @@ const { t } = Astro.props;
 ---
 
 <section class="pt-10 pb-20 md:pt-16 md:pb-28">
-  <div class="max-w-6xl mx-auto px-6 text-center">
-    <!-- Title logo -->
-    <div class="flex justify-center mb-8">
-      <img src="/logo-full.png" alt="aweskill" class="w-80 md:w-[28rem] lg:w-[36rem] h-auto" />
-    </div>
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="hero-shell grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div class="text-center lg:text-left">
+        <div class="hero-eyebrow mb-6 justify-center lg:justify-start">
+          <span class="hero-eyebrow__dot"></span>
+          <span>{t.heroEyebrow}</span>
+        </div>
 
-    <!-- Subtitle -->
-    <p class="text-xl md:text-2xl lg:text-3xl font-medium text-[var(--color-on-surface)] mb-4">{t.subtitle}</p>
+        <div class="mb-6 flex justify-center lg:justify-start">
+          <img src="/logo-full.png" alt="aweskill" class="w-72 md:w-[24rem] lg:w-[30rem] h-auto" />
+        </div>
 
-    <!-- Description -->
-    <p class="text-base md:text-lg text-[var(--color-secondary)] mb-14 max-w-2xl mx-auto leading-relaxed">{t.heroDesc}</p>
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-[var(--color-on-surface)] mb-4">
+          {t.subtitle}
+        </h1>
 
-    <!-- Install boxes -->
-    <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto mb-12">
+        <p class="text-base md:text-lg lg:text-xl text-[var(--color-secondary)] mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          {t.heroDesc}
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-5 mb-10">
       <!-- Human install -->
-      <div class="terminal-box text-left">
-        <div class="terminal-header">
-          <span class="terminal-dot terminal-dot--red"></span>
-          <span class="terminal-dot terminal-dot--yellow"></span>
-          <span class="terminal-dot terminal-dot--green"></span>
-          <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.humanLabel}</span>
-        </div>
-        <div class="terminal-body flex items-center justify-between gap-3">
-          <code class="font-mono text-sm md:text-base text-[var(--color-on-surface)] whitespace-nowrap overflow-x-auto">
-            <span class="text-[var(--color-secondary)] mr-1">$</span>{t.humanInstall}
-          </code>
-          <button
-            class="shrink-0 text-xs md:text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors copy-btn px-2 py-1 rounded border border-[var(--color-outline)] hover:border-[var(--color-accent)]/30"
-            data-copy={t.humanInstall}
-          >{t.copyButton}</button>
-        </div>
-      </div>
+          <div class="terminal-box text-left">
+            <div class="terminal-header">
+              <span class="terminal-dot terminal-dot--red"></span>
+              <span class="terminal-dot terminal-dot--yellow"></span>
+              <span class="terminal-dot terminal-dot--green"></span>
+              <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.humanLabel}</span>
+            </div>
+            <div class="terminal-body flex items-center justify-between gap-3">
+              <code class="font-mono text-sm md:text-base text-[var(--color-on-surface)] whitespace-nowrap overflow-x-auto">
+                <span class="text-[var(--color-secondary)] mr-1">$</span>{t.humanInstall}
+              </code>
+              <button
+                class="shrink-0 text-xs md:text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors copy-btn px-2 py-1 rounded border border-[var(--color-outline)] hover:border-[var(--color-accent)]/30"
+                data-copy={t.humanInstall}
+              >{t.copyButton}</button>
+            </div>
+          </div>
 
       <!-- AI install -->
-      <div class="terminal-box text-left">
-        <div class="terminal-header">
-          <span class="terminal-dot terminal-dot--red"></span>
-          <span class="terminal-dot terminal-dot--yellow"></span>
-          <span class="terminal-dot terminal-dot--green"></span>
-          <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.aiLabel}</span>
+          <div class="terminal-box text-left">
+            <div class="terminal-header">
+              <span class="terminal-dot terminal-dot--red"></span>
+              <span class="terminal-dot terminal-dot--yellow"></span>
+              <span class="terminal-dot terminal-dot--green"></span>
+              <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.aiLabel}</span>
+            </div>
+            <div class="terminal-body flex items-start justify-between gap-3">
+              <code class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-on-surface)] break-all">
+                <span class="text-[var(--color-secondary)] mr-1">$</span>{t.aiInstall}
+              </code>
+              <button
+                class="shrink-0 text-xs md:text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors copy-btn px-2 py-1 rounded border border-[var(--color-outline)] hover:border-[var(--color-accent)]/30"
+                data-copy={t.aiInstall}
+              >{t.copyButton}</button>
+            </div>
+          </div>
         </div>
-        <div class="terminal-body flex items-start justify-between gap-3">
-          <code class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-on-surface)] break-all">
-            <span class="text-[var(--color-secondary)] mr-1">$</span>{t.aiInstall}
-          </code>
-          <button
-            class="shrink-0 text-xs md:text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors copy-btn px-2 py-1 rounded border border-[var(--color-outline)] hover:border-[var(--color-accent)]/30"
-            data-copy={t.aiInstall}
-          >{t.copyButton}</button>
+
+        <div class="flex flex-wrap justify-center lg:justify-start gap-3 text-sm">
+          <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeVersion}</span>
+          <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeNode}</span>
+          <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeLicense}</span>
+          <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeAgents}</span>
         </div>
       </div>
-    </div>
 
-    <!-- Badges -->
-    <div class="flex flex-wrap justify-center gap-3 text-sm">
-      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeVersion}</span>
-      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeNode}</span>
-      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeLicense}</span>
-      <span class="px-4 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-outline)] text-[var(--color-on-surface)] font-mono font-medium">{t.badgeAgents}</span>
+      <aside class="route-panel">
+        <div class="route-panel__header">
+          <div>
+            <div class="route-panel__eyebrow">{t.heroPanelTitle}</div>
+            <div class="route-panel__title">bundle://aweskill/core</div>
+          </div>
+          <div class="route-status">
+            <span class="route-status__dot"></span>
+            <span>online</span>
+          </div>
+        </div>
+
+        <div class="route-metrics">
+          <div class="route-metric">
+            <span>{t.heroPanelBundle}</span>
+            <strong>global.yaml</strong>
+          </div>
+          <div class="route-metric">
+            <span>{t.heroPanelSkills}</span>
+            <strong>128</strong>
+          </div>
+          <div class="route-metric">
+            <span>{t.heroPanelAgents}</span>
+            <strong>47+</strong>
+          </div>
+          <div class="route-metric">
+            <span>{t.heroPanelLatency}</span>
+            <strong>43ms</strong>
+          </div>
+        </div>
+
+        <div class="route-graph">
+          <div class="route-node route-node--source">
+            <div class="route-node__label">skill bundle</div>
+            <div class="route-node__value">aweskill/core</div>
+          </div>
+          <div class="route-link route-link--1"></div>
+          <div class="route-link route-link--2"></div>
+          <div class="route-link route-link--3"></div>
+          <div class="route-link route-link--4"></div>
+          <div class="route-targets">
+            <div class="route-node route-node--target">
+              <span class="route-node__signal"></span>
+              <div>
+                <div class="route-node__label">Claude Code</div>
+                <div class="route-node__meta">linked</div>
+              </div>
+            </div>
+            <div class="route-node route-node--target">
+              <span class="route-node__signal"></span>
+              <div>
+                <div class="route-node__label">Codex</div>
+                <div class="route-node__meta">synced</div>
+              </div>
+            </div>
+            <div class="route-node route-node--target">
+              <span class="route-node__signal"></span>
+              <div>
+                <div class="route-node__label">Cursor</div>
+                <div class="route-node__meta">ready</div>
+              </div>
+            </div>
+            <div class="route-node route-node--target">
+              <span class="route-node__signal"></span>
+              <div>
+                <div class="route-node__label">Gemini CLI</div>
+                <div class="route-node__meta">online</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
