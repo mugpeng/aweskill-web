@@ -6,22 +6,12 @@ interface Props {
 }
 
 const { t } = Astro.props;
-
-const comparisons = [
-  { capability: 'Central local store', vercel: false, skillsManage: true, skillfish: false, skillsManager: true, aweskill: true },
-  { capability: 'Registry discovery', vercel: true, skillsManage: true, skillfish: true, skillsManager: false, aweskill: true },
-  { capability: 'Multi-agent projection', vercel: true, skillsManage: true, skillfish: true, skillsManager: true, aweskill: true },
-  { capability: 'Bundle management', vercel: false, skillsManage: true, skillfish: true, skillsManager: false, aweskill: true },
-  { capability: 'Agent-callable skills', vercel: false, skillsManage: false, skillfish: false, skillsManager: false, aweskill: true },
-  { capability: 'Self-update', vercel: false, skillsManage: false, skillfish: false, skillsManager: false, aweskill: true },
-  { capability: 'Doctor & recovery', vercel: false, skillsManage: false, skillfish: false, skillsManager: false, aweskill: true },
-];
 ---
 
-<section class="py-20 md:py-28">
+<section class="py-16 md:py-20">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">{t.comparisonTitle}</h2>
-    <p class="text-base md:text-lg text-[var(--color-secondary)] text-center mb-16 max-w-2xl mx-auto">{t.comparisonSubtitle}</p>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6">{t.comparisonTitle}</h2>
+    <p class="text-base md:text-lg text-[var(--color-secondary)] text-center mb-8 max-w-2xl mx-auto">{t.comparisonSubtitle}</p>
 
     <div class="terminal-box overflow-x-auto">
       <div class="terminal-header">
@@ -35,24 +25,48 @@ const comparisons = [
           <thead>
             <tr class="border-b border-[var(--color-outline)]">
               <th class="text-left py-3 pr-4 text-[var(--color-secondary)] font-medium">{t.colCapability}</th>
-              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">vercel-labs<br/>/skills</th>
-              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">iamzhihuix<br/>/skills-manage</th>
-              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">knoxgraeme<br/>/skillfish</th>
-              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">jiweiyeah<br/>/Skills-Manager</th>
-              <th class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold min-w-[120px]">mugpeng<br/>/aweskill</th>
+              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[140px]">{t.colManual}</th>
+              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[140px]">{t.colOthers}</th>
+              <th class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold min-w-[120px]">aweskill</th>
             </tr>
           </thead>
           <tbody>
-            {comparisons.map((row) => (
-              <tr class="border-b border-[var(--color-outline)]/50 last:border-0">
-                <td class="py-3 pr-4 text-[var(--color-on-surface)]">{row.capability}</td>
-                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.vercel ? '✓' : '✗'}</td>
-                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.skillsManage ? '✓' : '✗'}</td>
-                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.skillfish ? '✓' : '✗'}</td>
-                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.skillsManager ? '✓' : '✗'}</td>
-                <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">{row.aweskill ? '✓' : '✗'}</td>
-              </tr>
-            ))}
+            <tr class="border-b border-[var(--color-outline)]/50">
+              <td class="py-3 pr-4 text-[var(--color-on-surface)]">{t.rowCentralStore}</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)]">✗</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)] text-xs leading-relaxed">{t.rowCentralStoreOthers}</td>
+              <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">✓</td>
+            </tr>
+            <tr class="border-b border-[var(--color-outline)]/50">
+              <td class="py-3 pr-4 text-[var(--color-on-surface)]">{t.rowRegistry}</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)]">✗</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)] text-xs leading-relaxed">{t.rowRegistryOthers}</td>
+              <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">✓</td>
+            </tr>
+            <tr class="border-b border-[var(--color-outline)]/50">
+              <td class="py-3 pr-4 text-[var(--color-on-surface)]">{t.rowMultiAgent}</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)]">✗</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)] text-xs leading-relaxed">{t.rowMultiAgentOthers}</td>
+              <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">✓</td>
+            </tr>
+            <tr class="border-b border-[var(--color-outline)]/50">
+              <td class="py-3 pr-4 text-[var(--color-on-surface)]">{t.rowBundle}</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)]">✗</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)] text-xs leading-relaxed">{t.rowBundleOthers}</td>
+              <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">✓</td>
+            </tr>
+            <tr class="border-b border-[var(--color-outline)]/50">
+              <td class="py-3 pr-4 text-[var(--color-on-surface)]">{t.rowSelfUpdate}</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)]">✗</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)] text-xs leading-relaxed">{t.rowSelfUpdateOthers}</td>
+              <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">✓</td>
+            </tr>
+            <tr class="last:border-0">
+              <td class="py-3 pr-4 text-[var(--color-on-surface)]">{t.rowDoctor}</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)]">✗</td>
+              <td class="text-center py-3 px-4 text-[var(--color-secondary)] text-xs leading-relaxed">{t.rowDoctorOthers}</td>
+              <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">✓</td>
+            </tr>
           </tbody>
         </table>
       </div>
