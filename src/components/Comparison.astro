@@ -1,0 +1,61 @@
+---
+import type { i18n } from '../types';
+
+interface Props {
+  t: i18n;
+}
+
+const { t } = Astro.props;
+
+const comparisons = [
+  { capability: 'Central local store', vercel: false, skillsManage: true, skillfish: false, skillsManager: true, aweskill: true },
+  { capability: 'Registry discovery', vercel: true, skillsManage: true, skillfish: true, skillsManager: false, aweskill: true },
+  { capability: 'Multi-agent projection', vercel: true, skillsManage: true, skillfish: true, skillsManager: true, aweskill: true },
+  { capability: 'Bundle management', vercel: false, skillsManage: true, skillfish: true, skillsManager: false, aweskill: true },
+  { capability: 'Agent-callable skills', vercel: false, skillsManage: false, skillfish: false, skillsManager: false, aweskill: true },
+  { capability: 'Self-update', vercel: false, skillsManage: false, skillfish: false, skillsManager: false, aweskill: true },
+  { capability: 'Doctor & recovery', vercel: false, skillsManage: false, skillfish: false, skillsManager: false, aweskill: true },
+];
+---
+
+<section class="py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">{t.comparisonTitle}</h2>
+    <p class="text-base md:text-lg text-[var(--color-secondary)] text-center mb-16 max-w-2xl mx-auto">{t.comparisonSubtitle}</p>
+
+    <div class="terminal-box overflow-x-auto">
+      <div class="terminal-header">
+        <span class="terminal-dot terminal-dot--red"></span>
+        <span class="terminal-dot terminal-dot--yellow"></span>
+        <span class="terminal-dot terminal-dot--green"></span>
+        <span class="ml-2 text-xs font-mono text-[var(--color-secondary)] tracking-wide uppercase">{t.comparisonHeader}</span>
+      </div>
+      <div class="terminal-body">
+        <table class="w-full border-collapse font-mono text-sm">
+          <thead>
+            <tr class="border-b border-[var(--color-outline)]">
+              <th class="text-left py-3 pr-4 text-[var(--color-secondary)] font-medium">{t.colCapability}</th>
+              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">vercel-labs<br/>/skills</th>
+              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">iamzhihuix<br/>/skills-manage</th>
+              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">knoxgraeme<br/>/skillfish</th>
+              <th class="text-center py-3 px-4 text-[var(--color-secondary)] font-medium min-w-[100px]">jiweiyeah<br/>/Skills-Manager</th>
+              <th class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold min-w-[120px]">mugpeng<br/>/aweskill</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisons.map((row) => (
+              <tr class="border-b border-[var(--color-outline)]/50 last:border-0">
+                <td class="py-3 pr-4 text-[var(--color-on-surface)]">{row.capability}</td>
+                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.vercel ? '✓' : '✗'}</td>
+                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.skillsManage ? '✓' : '✗'}</td>
+                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.skillfish ? '✓' : '✗'}</td>
+                <td class="text-center py-3 px-4 text-[var(--color-secondary)]">{row.skillsManager ? '✓' : '✗'}</td>
+                <td class="text-center py-3 px-4 bg-[var(--color-accent)]/5 border-l-2 border-r-2 border-[var(--color-accent)]/20 text-[var(--color-accent)] font-semibold">{row.aweskill ? '✓' : '✗'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
