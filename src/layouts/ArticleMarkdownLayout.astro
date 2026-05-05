@@ -1,0 +1,29 @@
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ArticleLayout from '../components/ArticleLayout.astro';
+import ArticleTOC from '../components/ArticleTOC.astro';
+import '../styles/global.css';
+import en from '../i18n/en.json';
+import zh from '../i18n/zh.json';
+
+const { frontmatter } = Astro.props;
+const isZh = frontmatter.lang === 'zh';
+const t = isZh ? zh : en;
+const htmlLang = isZh ? 'zh-CN' : 'en';
+const articleLang = isZh ? 'zh' : 'en';
+---
+
+<Layout lang={htmlLang} title={frontmatter.pageTitle} description={frontmatter.description}>
+  <Header t={t} isArticle={true} langHrefOverride={frontmatter.langHref} />
+  <main>
+    <ArticleLayout t={t} title={frontmatter.title} date={frontmatter.date} readTime={frontmatter.readTime} lang={articleLang}>
+      <Fragment slot="toc">
+        <ArticleTOC headings={frontmatter.headings ?? []} />
+      </Fragment>
+      <slot />
+    </ArticleLayout>
+  </main>
+  <Footer t={t} />
+</Layout>

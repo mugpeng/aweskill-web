@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import NewsIndex from '../../components/NewsIndex.astro';
+import '../../styles/global.css';
+import t from '../../i18n/en.json';
+import { getArticles } from '../../data/articles';
+
+const articles = getArticles('en');
+---
+
+<Layout lang="en" title="News — aweskill" description="Product notes on AI agent Skills, local workflows, and aweskill.">
+  <Header t={t} langHrefOverride="/zh/articles" />
+  <main>
+    <NewsIndex t={t} lang="en" articles={articles} />
+  </main>
+  <Footer t={t} />
+</Layout>

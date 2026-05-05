@@ -391,6 +391,11 @@ body::after {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.light .article-content pre {
+  background: var(--color-surface) !important;
+  color: var(--color-on-surface) !important;
+}
+
 .article-content pre:hover {
   border-color: rgba(34, 211, 238, 0.25);
   box-shadow: 0 0 24px rgba(34, 211, 238, 0.06);
@@ -426,7 +431,7 @@ body::after {
   font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.6;
-  color: var(--color-on-surface);
+  color: var(--color-on-surface) !important;
   overflow-x: auto;
 }
 
@@ -437,7 +442,7 @@ body::after {
   border-radius: 4px;
   background: var(--color-surface);
   border: 1px solid var(--color-outline);
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
 }
 
 .article-content pre code {
@@ -445,7 +450,21 @@ body::after {
   border: none;
   background: none;
   border-radius: 0;
-  color: var(--color-on-surface);
+  color: var(--color-on-surface) !important;
+}
+
+.light .article-content pre code {
+  color: var(--color-on-surface) !important;
+  background: transparent !important;
+}
+
+.light .article-content pre code span {
+  color: var(--color-on-surface) !important;
+}
+
+.light .article-content code:not(pre code) {
+  background: var(--color-surface-elevated);
+  color: var(--color-accent) !important;
 }
 
 /* Article tables */
@@ -510,6 +529,16 @@ body::after {
   border-radius: 0 8px 8px 0;
   color: var(--color-secondary);
   font-style: italic;
+}
+
+.article-content blockquote p,
+.article-content blockquote code {
+  color: inherit !important;
+}
+
+.light .article-content blockquote {
+  background: var(--color-surface);
+  color: var(--color-secondary);
 }
 
 /* Article images */

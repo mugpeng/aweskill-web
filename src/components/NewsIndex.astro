@@ -1,0 +1,97 @@
+---
+import type { ArticleMeta, ArticleLocale } from '../data/articles';
+import type { i18n } from '../types';
+
+interface Props {
+  t: i18n;
+  lang: ArticleLocale;
+  articles: ArticleMeta[];
+}
+
+const { t, lang, articles } = Astro.props;
+const isZh = lang === 'zh';
+const eyebrow = isZh ? 'News' : 'News';
+const title = isZh ? '产品笔记' : 'Product Notes';
+const subtitle = isZh
+  ? '关于 AI Agent、Skills 本地工作流和 aweskill 的产品笔记。'
+  : 'Field notes on AI agent Skills, local workflows, and aweskill.';
+const latestLabel = isZh ? 'Latest' : 'Latest';
+const readLabel = isZh ? '阅读全文' : 'Read article';
+---
+
+<section class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+  <div class="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-start">
+    <header class="lg:sticky lg:top-28">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--color-outline)] bg-[var(--color-surface)] text-xs font-mono text-[var(--color-secondary)] mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse-glow"></span>
+        {eyebrow}
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-bold leading-tight tracking-tight text-gradient-hero mb-5">
+        {title}
+      </h1>
+      <p class="text-base md:text-lg text-[var(--color-secondary)] leading-relaxed max-w-md">
+        {subtitle}
+      </p>
+      <div class="mt-8 grid grid-cols-2 gap-3 max-w-sm">
+        <div class="terminal-box px-4 py-3">
+          <div class="font-mono text-2xl font-semibold text-[var(--color-on-surface)]">{articles.length}</div>
+          <div class="mt-1 text-xs font-mono uppercase tracking-wide text-[var(--color-secondary)]">
+            {isZh ? 'Articles' : 'Articles'}
+          </div>
+        </div>
+        <div class="terminal-box px-4 py-3">
+          <div class="font-mono text-2xl font-semibold text-[var(--color-on-surface)]">47+</div>
+          <div class="mt-1 text-xs font-mono uppercase tracking-wide text-[var(--color-secondary)]">
+            Agents
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="space-y-4">
+      {articles.map((article, index) => (
+        <a
+          href={article.href}
+          class:list={[
+            'group block glow-card scanline-overlay p-5 sm:p-6 overflow-hidden',
+            index === 0 ? 'border-[var(--color-accent)]/40' : '',
+          ]}
+        >
+          <div class="flex flex-col sm:flex-row sm:items-start gap-5">
+            <div class="sm:w-28 shrink-0">
+              <div class="font-mono text-sm text-[var(--color-secondary)]">{article.date}</div>
+              {index === 0 && (
+                <div class="mt-3 inline-flex px-2 py-0.5 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 text-[10px] font-mono uppercase tracking-wide text-[var(--color-accent-hover)]">
+                  {latestLabel}
+                </div>
+              )}
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <div class="text-xs font-mono uppercase tracking-wide text-[var(--color-accent)] mb-3">
+                {article.feature}
+              </div>
+              <h2 class="text-xl sm:text-2xl font-semibold leading-snug text-[var(--color-on-surface)] group-hover:text-[var(--color-accent-hover)] transition-colors">
+                {article.title}
+              </h2>
+              <p class="mt-3 text-sm sm:text-base leading-relaxed text-[var(--color-secondary)]">
+                {article.description}
+              </p>
+              <div class="mt-5 flex flex-wrap items-center gap-2">
+                {article.tags.map((tag) => (
+                  <span class="px-2.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--color-outline)] text-xs font-mono text-[var(--color-secondary)]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="sm:pt-1 shrink-0 text-sm font-mono text-[var(--color-secondary)] group-hover:text-[var(--color-accent-hover)] transition-colors">
+              {readLabel} →
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

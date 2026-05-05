@@ -51,6 +51,6 @@
   "copyButton": "Copy",
   "copiedButton": "Copied!",
   "newsLabel": "News",
-  "newsHref": "/articles/stop-copying-skills",
-  "langSwitchArticleHref": "/zh/articles/stop-copying-skills"
+  "newsHref": "/articles",
+  "langSwitchArticleHref": "/zh/articles"
 }

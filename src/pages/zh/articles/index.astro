@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import NewsIndex from '../../../components/NewsIndex.astro';
+import '../../../styles/global.css';
+import t from '../../../i18n/zh.json';
+import { getArticles } from '../../../data/articles';
+
+const articles = getArticles('zh');
+---
+
+<Layout lang="zh-CN" title="动态 — aweskill" description="关于 AI Agent、Skills 本地工作流和 aweskill 的产品笔记。">
+  <Header t={t} langHrefOverride="/articles" />
+  <main>
+    <NewsIndex t={t} lang="zh" articles={articles} />
+  </main>
+  <Footer t={t} />
+</Layout>
