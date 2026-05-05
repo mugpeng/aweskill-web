@@ -3,6 +3,7 @@ export interface i18n {
   langLabel: string;
   langSwitch: string;
   langSwitchHref: string;
+  homeHref: string;
   title: string;
   subtitle: string;
   heroDesc: string;
@@ -28,6 +29,7 @@ export interface i18n {
   footernpm: string;
   footerLicense: string;
   footerReadme: string;
+  footerReadmeHref: string;
   copyButton: string;
   copiedButton: string;
   newsLabel: string;

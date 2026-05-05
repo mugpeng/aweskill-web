@@ -13,6 +13,6 @@ const { t } = Astro.props;
     <a href="https://github.com/mugpeng/aweskill" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerGitHub}</a>
     <a href="https://www.npmjs.com/package/aweskill" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footernpm}</a>
     <a href="https://github.com/mugpeng/aweskill/blob/main/LICENSE" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerLicense}</a>
-    <a href="https://github.com/mugpeng/aweskill/blob/main/README.md" target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerReadme}</a>
+    <a href={t.footerReadmeHref} target="_blank" rel="noopener" class="hover:text-[var(--color-on-surface)] transition-colors">{t.footerReadme}</a>
   </div>
 </footer>
