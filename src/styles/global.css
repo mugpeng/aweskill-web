@@ -318,3 +318,210 @@ body::after {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ══════════════════════════════════════════
+   Article content typography
+   ══════════════════════════════════════════ */
+.article-content {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--color-on-surface);
+}
+
+.article-content p {
+  margin-bottom: 1.5em;
+}
+
+.article-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 3em;
+  margin-bottom: 1em;
+  padding-left: 16px;
+  border-left: 3px solid var(--color-accent);
+  letter-spacing: -0.01em;
+}
+
+.article-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+.article-content a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.article-content a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+.article-content strong {
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.article-content ul,
+.article-content ol {
+  margin-bottom: 1.5em;
+  padding-left: 1.5em;
+}
+
+.article-content li {
+  margin-bottom: 0.5em;
+}
+
+.article-content li strong {
+  color: var(--color-on-surface);
+}
+
+/* Article code blocks — terminal style */
+.article-content pre {
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-content pre:hover {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.06);
+}
+
+.light .article-content pre:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.article-content pre::before {
+  content: '';
+  display: block;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-outline);
+  background: rgba(0, 0, 0, 0.15);
+  background-image:
+    radial-gradient(circle, #ef4444 4px, transparent 4px),
+    radial-gradient(circle, #eab308 4px, transparent 4px),
+    radial-gradient(circle, #22c55e 4px, transparent 4px);
+  background-size: 12px 12px, 12px 12px, 12px 12px;
+  background-position: 16px center, 32px center, 48px center;
+  background-repeat: no-repeat;
+}
+
+.light .article-content pre::before {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.article-content pre code {
+  display: block;
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-on-surface);
+  overflow-x: auto;
+}
+
+.article-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline);
+  color: var(--color-accent);
+}
+
+.article-content pre code {
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  color: var(--color-on-surface);
+}
+
+/* Article tables */
+.article-content table {
+  width: 100%;
+  margin-bottom: 1.5em;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline);
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  overflow-x: auto;
+}
+
+.article-content thead {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.light .article-content thead {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.article-content th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-outline);
+}
+
+.article-content td {
+  padding: 12px 16px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--color-outline);
+}
+
+.article-content tr:last-child td {
+  border-bottom: none;
+}
+
+.article-content tr:hover td {
+  background: rgba(34, 211, 238, 0.03);
+}
+
+.light .article-content tr:hover td {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+.article-content td strong {
+  color: var(--color-accent);
+}
+
+/* Article blockquotes */
+.article-content blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: 12px 20px;
+  margin-bottom: 1.5em;
+  background: var(--color-surface);
+  border-radius: 0 8px 8px 0;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+/* Article images */
+.article-content img {
+  border-radius: 12px;
+  border: 1px solid var(--color-outline);
+  margin: 1.5em 0;
+}
+
+/* Article horizontal rule */
+.article-content hr {
+  border: none;
+  border-top: 1px solid var(--color-outline);
+  margin: 3em 0;
+}

@@ -1,0 +1,285 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import ArticleTOC from '../../components/ArticleTOC.astro';
+import '../../styles/global.css';
+import t from '../../i18n/en.json';
+
+const headings = [
+  { id: 'the-problem-is-not-day-one', text: 'The Problem Is Not Day One', level: 2 },
+  { id: 'what-is-aweskill', text: 'What Is aweskill?', level: 2 },
+  { id: 'how-it-compares', text: 'How It Compares', level: 2 },
+  { id: 'real-world-scenarios', text: 'Real-World Scenarios', level: 2 },
+  { id: 'scenario-1', text: 'Solo Developer Switching Agents', level: 3 },
+  { id: 'scenario-2', text: 'Team Lead Building Standard Sets', level: 3 },
+  { id: 'scenario-3', text: 'Upstream Author Ships Updates', level: 3 },
+  { id: 'scenario-4', text: 'Researcher Using Scientific Skills', level: 3 },
+  { id: 'scenario-5', text: 'Disaster Recovery', level: 3 },
+  { id: 'install-via-agent', text: 'Install via Your Agent', level: 2 },
+  { id: 'getting-started', text: 'Getting Started', level: 2 },
+  { id: 'other-tools', text: 'Other Tools Worth Knowing', level: 2 },
+  { id: 'agent-self-manage', text: 'Let Agents Manage Skills', level: 2 },
+  { id: '47-agents', text: '47 Agents and Counting', level: 2 },
+  { id: 'when-to-use', text: 'When to Use aweskill', level: 2 },
+  { id: 'the-bottom-line', text: 'The Bottom Line', level: 2 },
+];
+---
+
+<Layout lang="en" title="Stop Copying Skills Into Every AI Agent — aweskill" description="How aweskill fixes the multi-agent skill mess. One central store, 47+ agents, zero copies.">
+  <Header t={t} isArticle={true} />
+  <main>
+    <ArticleLayout t={t} title="Stop Copying Skills Into Every AI Agent" date="2026-05-04" readTime="8 min read" lang="en">
+      <Fragment slot="toc">
+        <ArticleTOC headings={headings} />
+      </Fragment>
+
+      <p>You use more than one AI coding agent. Claude Code for deep refactors. Cursor for quick edits. Codex for autonomous tasks. Gemini CLI for multimodal work. Maybe Windsurf or Qwen Code too.</p>
+
+      <p>Each one has its own skill directory. Each one expects <code>SKILL.md</code> files in a different place. And every time you find a useful skill, you copy it. Then copy it again. Then again.</p>
+
+      <p>A month later, one copy is outdated, one copy is broken, one has local edits nobody remembers making, and nobody knows which one is the real version.</p>
+
+      <p>That is the problem <code>aweskill</code> solves.</p>
+
+      <p>Website: <a href="https://aweskill.webioinfo.top/">aweskill.webioinfo.top</a></p>
+
+      <h2 id="the-problem-is-not-day-one">The Problem Is Not Day One — It Is Day Thirty</h2>
+
+      <p>Installing a skill once into one agent is easy. Most tools handle that.</p>
+
+      <p>The hard problems show up later:</p>
+
+      <ul>
+        <li><strong>Which copy is real?</strong> The same <code>pr-review</code> skill exists in <code>~/.claude/skills/</code>, <code>~/.cursor/skills/</code>, and <code>~/.codex/skills/</code>. Which one do you edit?</li>
+        <li><strong>How do you update?</strong> The upstream author shipped a fix. Now you need to find every copy and replace it.</li>
+        <li><strong>How do you organize?</strong> You have 15 skills. Some are for backend work, some for frontend. Some you only want in Codex, some everywhere.</li>
+        <li><strong>How do you recover?</strong> A symlink broke. An agent updated and wiped your skills directory. Now what?</li>
+        <li><strong>How do you avoid the copy spiral?</strong> Every new agent means another round of manual copying.</li>
+      </ul>
+
+      <p><code>aweskill</code> treats skills as a long-term local asset — not a one-time install target.</p>
+
+      <h2 id="what-is-aweskill">What Is aweskill?</h2>
+
+      <p><code>aweskill</code> is a local skill package manager for AI agents. Think of it as <code>npm</code> for your <code>SKILL.md</code> files.</p>
+
+      <p>It keeps one central skill store in <code>~/.aweskill/skills/</code>, then projects selected skills into each agent's expected directory using symlinks (or junctions/copies on Windows).</p>
+
+      <h3>Key Selling Points</h3>
+
+      <table>
+        <thead><tr><th>#</th><th>Feature</th><th>Why It Matters</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Central Store</strong></td><td>One copy of every skill in <code>~/.aweskill/skills/</code>. No more scattered duplicates.</td></tr>
+          <tr><td>2</td><td><strong>Multi-Agent Projection</strong></td><td>Same skill, four agents, one command. Supports 47 agents.</td></tr>
+          <tr><td>3</td><td><strong>Bundles</strong></td><td>Group skills by workflow and project the whole set at once.</td></tr>
+          <tr><td>4</td><td><strong>Source-Aware Updates</strong></td><td>Records where each skill came from. Pulls upstream changes while protecting local edits.</td></tr>
+          <tr><td>5</td><td><strong>Built-in Agent Skills</strong></td><td>Ships meta-skills so AI agents can manage skills through natural language.</td></tr>
+          <tr><td>6</td><td><strong>Local Maintenance</strong></td><td>Backup, restore, dedup, clean, sync, recover — all in one CLI.</td></tr>
+          <tr><td>7</td><td><strong>Website + Docs</strong></td><td><a href="https://aweskill.webioinfo.top/">aweskill.webioinfo.top</a> gives install guides and agent compatibility.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="how-it-compares">How It Compares</h2>
+
+      <div class="overflow-x-auto">
+        <table>
+          <thead><tr><th>Capability</th><th>cc-switch</th><th>sciskill</th><th>Skills Manager</th><th>skillfish</th><th>vercel-labs/skills</th><th>skills-manage</th><th><strong>aweskill</strong></th></tr></thead>
+          <tbody>
+            <tr><td>Central local store</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Registry discovery</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+            <tr><td>GitHub repo import</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Local-path import</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Tracked updates</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>No</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Multi-agent projection</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Bundle grouping</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Agent-callable skills</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Local maintenance</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Bottom line</strong>: Other tools can install skills. <code>aweskill</code> manages the full lifecycle — discover, install, organize, update, maintain, and recover — across every agent you use.</p>
+
+      <h2 id="real-world-scenarios">Real-World Scenarios</h2>
+
+      <h3 id="scenario-1">Scenario 1: The Solo Developer Switching Agents Mid-Project</h3>
+
+      <p>You start a feature in Claude Code. Halfway through, you switch to Cursor for the UI work. Then you use Codex to generate test cases. All three agents need the same <code>pr-review</code> and <code>bug-triage</code> skills.</p>
+
+      <p><strong>Without aweskill:</strong></p>
+      <ul>
+        <li>Copy <code>pr-review/SKILL.md</code> to <code>~/.claude/skills/pr-review/</code></li>
+        <li>Copy again to <code>~/.cursor/skills/pr-review/</code></li>
+        <li>Copy again to <code>~/.codex/skills/pr-review/</code></li>
+        <li>Repeat for <code>bug-triage</code></li>
+        <li>Hope they stay in sync</li>
+      </ul>
+
+      <p><strong>With aweskill:</strong></p>
+
+      <pre><code>aweskill agent add skill pr-review,bug-triage --global --agent claude-code
+aweskill agent add skill pr-review,bug-triage --global --agent cursor
+aweskill agent add skill pr-review,bug-triage --global --agent codex</code></pre>
+
+      <p>One source. Three projections. Zero copies.</p>
+
+      <h3 id="scenario-2">Scenario 2: The Team Lead Building Standard Skill Sets</h3>
+
+      <p>Your team uses Claude Code and Cursor. You want every team member to have the same core skills: code review, testing guidelines, API design conventions, and release checklists.</p>
+
+      <p><strong>Without aweskill:</strong> Share a Google Doc listing which skills to install manually. Nobody does it consistently.</p>
+
+      <p><strong>With aweskill:</strong></p>
+
+      <pre><code>aweskill bundle create team-standard
+aweskill bundle add team-standard pr-review,test-guidelines,api-design,release-checklist
+aweskill agent add bundle team-standard --global --agent claude-code
+aweskill agent add bundle team-standard --global --agent cursor</code></pre>
+
+      <p>Now any team member runs the same two commands and gets the identical skill set. The bundle definition is a simple YAML file you can commit to a shared repo.</p>
+
+      <h3 id="scenario-3">Scenario 3: The Upstream Skill Author Who Ships Updates</h3>
+
+      <p>You downloaded a <code>security-review</code> skill from <code>skills.sh</code>. The author just published an improved version with OWASP 2025 coverage.</p>
+
+      <p><strong>Without aweskill:</strong> Hunt through four agent directories, download the new version, manually replace each copy, pray you didn't miss one.</p>
+
+      <p><strong>With aweskill:</strong></p>
+
+      <pre><code>aweskill update --check           # See what has updates
+aweskill update security-review   # Pull the update into central store</code></pre>
+
+      <p>All projected agents pick up the change automatically — they point to the same central copy.</p>
+
+      <h3 id="scenario-4">Scenario 4: The Researcher Using Scientific Skills</h3>
+
+      <p>You found a proteomics analysis skill on <code>sciskillhub.org</code> and want it available in both Gemini CLI and Claude Code.</p>
+
+      <pre><code>aweskill find proteomics
+aweskill install sciskill:open-source/research/lifesciences-proteomics
+aweskill agent add skill lifesciences-proteomics --global --agent gemini-cli
+aweskill agent add skill lifesciences-proteomics --global --agent claude-code</code></pre>
+
+      <p>One install. Multiple agents. Source tracked for future updates.</p>
+
+      <h3 id="scenario-5">Scenario 5: Disaster Recovery</h3>
+
+      <p>An agent update wiped your <code>~/.cursor/skills/</code> directory. All your carefully curated skills are gone.</p>
+
+      <p><strong>Without aweskill:</strong> Start over. Re-download everything. Rebuild your setup from memory.</p>
+
+      <p><strong>With aweskill:</strong></p>
+
+      <pre><code>aweskill store backup                          # You ran this last week
+aweskill store restore ~/Downloads/aweskill-backup.tar.gz
+aweskill agent add bundle daily-coding --global --agent cursor</code></pre>
+
+      <p>Central store restored. Bundle re-projected. Back to work.</p>
+
+      <h2 id="install-via-agent">Install aweskill by asking your agent</h2>
+
+      <p>One of the cleanest parts of the workflow is that you do not need to perform the bootstrap manually. You can hand the protocol to your coding agent directly:</p>
+
+      <pre><code>Read https://github.com/mugpeng/aweskill/blob/main/README.ai.md and follow it to install aweskill.</code></pre>
+
+      <img src="/aweskill-agent-install-demo.png" alt="Example of an AI coding agent following README.ai.md to install aweskill and activate the built-in management skills." />
+
+      <p>In one pass, the agent can install the CLI, initialize the central store, detect the current runtime, project <code>aweskill</code> and <code>aweskill-doctor</code>, and then tell you to restart so the new skills become active.</p>
+
+      <h2 id="getting-started">Getting Started</h2>
+
+      <p>Install:</p>
+      <pre><code>npm install -g aweskill
+aweskill store init</code></pre>
+
+      <p>Find and install a skill:</p>
+      <pre><code>aweskill find pr-review
+aweskill install owner/repo</code></pre>
+
+      <p>Project it everywhere:</p>
+      <pre><code>aweskill agent add skill pr-review --global --agent claude-code
+aweskill agent add skill pr-review --global --agent codex
+aweskill agent add skill pr-review --global --agent cursor
+aweskill agent add skill pr-review --global --agent gemini-cli</code></pre>
+
+      <p>Or use a bundle for the whole set:</p>
+      <pre><code>aweskill bundle create daily-coding
+aweskill bundle add daily-coding pr-review,bug-triage,release-checklist
+aweskill agent add bundle daily-coding --global --agent claude-code
+aweskill agent add bundle daily-coding --global --agent cursor</code></pre>
+
+      <h2 id="other-tools">Other Tools Worth Knowing</h2>
+
+      <p><code>aweskill</code> is the best fit when you want one repairable local skill system across multiple agents. But the surrounding ecosystem is getting better, and a few adjacent tools are worth recommending for different jobs:</p>
+
+      <ul>
+        <li><a href="https://github.com/iamzhihuix/skills-manage">skills-manage</a>: a good choice when you want visual skill management. It emphasizes a central library, marketplace browsing, GitHub import, collections, and per-platform installs in a desktop UI.</li>
+        <li><a href="https://github.com/farion1231/cc-switch">cc-switch</a>: useful when your main problem is switching API providers, model endpoints, and related local AI tool configuration, not just managing skills.</li>
+        <li><a href="https://github.com/sciskillhub/sciskill">sciskill</a>: useful when you specifically want to discover and download scientific or bioinformatics-oriented skills collected by the <code>sciskillhub</code> registry workflow.</li>
+        <li><a href="https://github.com/vercel-labs/skills">vercel-labs/skills</a>: a strong entry point when you want a popular open skills CLI and prefer browsing skills through the broader <code>skills.sh</code> ecosystem.</li>
+      </ul>
+
+      <h2 id="agent-self-manage">Let AI Agents Manage Their Own Skills</h2>
+
+      <p><code>aweskill</code> ships two built-in meta-skills. Project them into your current agent first:</p>
+
+      <pre><code>aweskill agent supported
+aweskill agent add skill aweskill,aweskill-doctor --global --agent codex
+aweskill agent list --global --agent codex</code></pre>
+
+      <p>Replace <code>codex</code> with your agent id.</p>
+
+      <p>Your AI agent can respond to requests like:</p>
+      <ul>
+        <li>"Install the latest pr-review skill for all my agents"</li>
+        <li>"Check if any skills have updates"</li>
+        <li>"Clean up duplicate skills in the store"</li>
+        <li>"Backup my skill store"</li>
+      </ul>
+
+      <p>The agent runs <code>aweskill</code> commands on your behalf. This turns <code>aweskill</code> from a tool you manage into a tool your agents can self-manage.</p>
+
+      <h2 id="47-agents">47 Agents and Counting</h2>
+
+      <p><code>aweskill</code> currently supports <strong>47 AI coding agents</strong>:</p>
+
+      <p>Claude Code, Cursor, Windsurf, Codex, GitHub Copilot, Gemini CLI, OpenCode, Goose, Amp, Roo Code, Kiro CLI, Kilo Code, Trae, Cline, Antigravity, Droid, Augment, OpenClaw, CodeBuddy, Crush, Kode, Mistral Vibe, Mux, OpenClaude IDE, OpenHands, Qoder, Qwen Code, Replit, Neovate, AdaL, and more.</p>
+
+      <p>See the <a href="https://github.com/mugpeng/aweskill#supported-agents">full list in the README</a>.</p>
+
+      <h2 id="when-to-use">When to Use aweskill</h2>
+
+      <p><strong>Use aweskill if you:</strong></p>
+      <ul>
+        <li>Use more than one AI coding agent</li>
+        <li>Want one local source of truth for skills</li>
+        <li>Need the same skills available across Claude Code, Cursor, Codex, Gemini CLI, and others</li>
+        <li>Want reusable bundles instead of ad-hoc copying</li>
+        <li>Care about tracked updates and recoverable local state</li>
+        <li>Want your AI agents to manage skills via natural language</li>
+      </ul>
+
+      <p><strong>You might not need it if:</strong></p>
+      <ul>
+        <li>You only use one agent and never plan to switch</li>
+        <li>You install skills once and never touch them again</li>
+      </ul>
+
+      <h2 id="the-bottom-line">The Bottom Line</h2>
+
+      <p>Installing a skill is not the hard part. Keeping it updated, organized, consistent across agents, and recoverable when things break — that is the hard part.</p>
+
+      <p><code>aweskill</code> solves the day-thirty problem. One central store. Multi-agent projection. Source-tracked updates. Bundle organization. Built-in maintenance. Agent-callable management.</p>
+
+      <p>If you work across multiple AI agents, <code>aweskill</code> turns scattered skill folders into something you can actually manage.</p>
+
+      <hr />
+
+      <p><strong>Website</strong>: <a href="https://aweskill.webioinfo.top/">aweskill.webioinfo.top</a> &bull; <strong>Install</strong>: <code>npm install -g aweskill</code> &bull; <strong>GitHub</strong>: <a href="https://github.com/mugpeng/aweskill">mugpeng/aweskill</a></p>
+    </ArticleLayout>
+  </main>
+  <Footer t={t} />
+</Layout>

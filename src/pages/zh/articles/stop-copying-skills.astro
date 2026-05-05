@@ -1,0 +1,285 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ArticleLayout from '../../../components/ArticleLayout.astro';
+import ArticleTOC from '../../../components/ArticleTOC.astro';
+import '../../../styles/global.css';
+import t from '../../../i18n/zh.json';
+
+const headings = [
+  { id: 'the-problem', text: '真正的问题不是第一天', level: 2 },
+  { id: 'what-is-aweskill', text: 'aweskill 是什么？', level: 2 },
+  { id: 'how-it-compares', text: '对比：aweskill vs 其他工具', level: 2 },
+  { id: 'scenarios', text: '使用场景', level: 2 },
+  { id: 'scenario-1', text: '独立开发者切换 Agent', level: 3 },
+  { id: 'scenario-2', text: '团队负责人构建标准集', level: 3 },
+  { id: 'scenario-3', text: 'Skill 作者发布更新', level: 3 },
+  { id: 'scenario-4', text: '科研人员使用科研 Skill', level: 3 },
+  { id: 'scenario-5', text: '灾难恢复', level: 3 },
+  { id: 'install-via-agent', text: '让 Agent 帮你安装', level: 2 },
+  { id: 'getting-started', text: '快速开始', level: 2 },
+  { id: 'other-tools', text: '同类工具推荐', level: 2 },
+  { id: 'agent-self-manage', text: '让 Agent 自主管理', level: 2 },
+  { id: '47-agents', text: '47 个 Agent', level: 2 },
+  { id: 'when-to-use', text: '什么时候该用', level: 2 },
+  { id: 'summary', text: '总结', level: 2 },
+];
+---
+
+<Layout lang="zh" title="别再把 Skills 复制到每个 AI Agent 里了 — aweskill" description="aweskill 如何解决多 Agent 技能管理的混乱。一个中央仓库，47+ 个 Agent，零冗余。">
+  <Header t={t} isArticle={true} />
+  <main>
+    <ArticleLayout t={t} title="别再把 Skills 复制到每个 AI Agent 里了" date="2026-05-04" readTime="8 分钟阅读" lang="zh">
+      <Fragment slot="toc">
+        <ArticleTOC headings={headings} />
+      </Fragment>
+
+      <p>你同时用好几个 AI 编码工具。Claude Code 做深度重构，Cursor 做快速编辑，Codex 跑自主任务，Gemini CLI 做多模态工作，可能还有 Windsurf 或 Qwen Code。</p>
+
+      <p>每个工具有自己的 skill 目录，<code>SKILL.md</code> 放的位置各不相同。每发现一个好用的 skill，你就复制一次。然后再复制一次。再复制一次。</p>
+
+      <p>一个月后：一份过期了，一份坏了，一份有谁也记不清的本地改动，没人知道到底哪份才是最新的。</p>
+
+      <p>这就是 <code>aweskill</code> 要解决的问题。</p>
+
+      <p>官网：<a href="https://aweskill.webioinfo.top/">aweskill.webioinfo.top</a></p>
+
+      <h2 id="the-problem">真正的问题不是第一天——是第三十天</h2>
+
+      <p>给一个 agent 装个 skill 很简单，大多数工具都能做到。</p>
+
+      <p>难的是之后：</p>
+
+      <ul>
+        <li><strong>哪份是真的？</strong> 同一个 <code>pr-review</code> skill 存在于 <code>~/.claude/skills/</code>、<code>~/.cursor/skills/</code> 和 <code>~/.codex/skills/</code>。你改哪个？</li>
+        <li><strong>怎么更新？</strong> 上游作者修了个 bug，你得找到每一份副本，逐个替换。</li>
+        <li><strong>怎么组织？</strong> 你有 15 个 skill，有些是后端的，有些是前端的，有些只想在 Codex 里用，有些要全局启用。</li>
+        <li><strong>怎么恢复？</strong> 一个 symlink 断了，一个 agent 更新把你的 skill 目录清空了。怎么办？</li>
+        <li><strong>怎么避免复制怪圈？</strong> 每加一个新 agent，就再来一轮手工复制。</li>
+      </ul>
+
+      <p><code>aweskill</code> 把 skill 当成长期本地资产来管理——不是装一次就不管了的东西。</p>
+
+      <h2 id="what-is-aweskill">aweskill 是什么？</h2>
+
+      <p><code>aweskill</code> 是面向 AI Agent 的本地 Skill 包管理器。可以把它想象成 <code>SKILL.md</code> 文件的 <code>npm</code>。</p>
+
+      <p>它在 <code>~/.aweskill/skills/</code> 维护一份中央 skill 仓库，然后通过 symlink（Windows 上用 junction 或托管副本）把选中的 skill 投影到各个 agent 需要的目录。</p>
+
+      <h3>核心亮点</h3>
+
+      <table>
+        <thead><tr><th>#</th><th>特性</th><th>为什么重要</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>中央仓库</strong></td><td>每个 skill 只有一份，放在 <code>~/.aweskill/skills/</code>。不再有散落各处的重复副本。</td></tr>
+          <tr><td>2</td><td><strong>多 Agent 投影</strong></td><td>同一个 skill，四个 agent，一条命令。支持 47 个 agent。</td></tr>
+          <tr><td>3</td><td><strong>Bundle 打包</strong></td><td>按工作流分组 skill，一次性投影整组。</td></tr>
+          <tr><td>4</td><td><strong>来源追踪更新</strong></td><td>记录每个 skill 来自哪里。拉取上游更新，同时保护本地修改。</td></tr>
+          <tr><td>5</td><td><strong>内置 Agent 管理技能</strong></td><td>自带元技能——AI agent 能通过自然语言管理 skill。</td></tr>
+          <tr><td>6</td><td><strong>本地维护能力</strong></td><td>备份、恢复、查重、清理、同步、修复——全部集成在一个 CLI 里。</td></tr>
+          <tr><td>7</td><td><strong>官网与文档入口</strong></td><td><a href="https://aweskill.webioinfo.top/">aweskill.webioinfo.top</a> 提供安装说明和 agent 兼容性总览。</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="how-it-compares">对比：aweskill vs 其他工具</h2>
+
+      <div class="overflow-x-auto">
+        <table>
+          <thead><tr><th>能力</th><th>cc-switch</th><th>sciskill</th><th>Skills Manager</th><th>skillfish</th><th>vercel-labs/skills</th><th>skills-manage</th><th><strong>aweskill</strong></th></tr></thead>
+          <tbody>
+            <tr><td>中央本地 skill 仓库</td><td>否</td><td>否</td><td>是</td><td>否</td><td>否</td><td>是</td><td><strong>是</strong></td></tr>
+            <tr><td>registry / catalog 发现</td><td>否</td><td>是</td><td>否</td><td>是</td><td>是</td><td>是</td><td><strong>是</strong></td></tr>
+            <tr><td>GitHub 仓库导入</td><td>是</td><td>否</td><td>否</td><td>是</td><td>是</td><td>是</td><td><strong>是</strong></td></tr>
+            <tr><td>本地路径导入</td><td>否</td><td>否</td><td>否</td><td>否</td><td>是</td><td>否</td><td><strong>是</strong></td></tr>
+            <tr><td>按来源追踪更新</td><td>否</td><td>否</td><td>否</td><td>是</td><td>是</td><td>否</td><td><strong>是</strong></td></tr>
+            <tr><td>多 agent 投影</td><td>是</td><td>否</td><td>是</td><td>是</td><td>是</td><td>是</td><td><strong>是</strong></td></tr>
+            <tr><td>bundle 分组</td><td>否</td><td>否</td><td>否</td><td>是</td><td>否</td><td>是</td><td><strong>是</strong></td></tr>
+            <tr><td>可被 agent 调用</td><td>否</td><td>否</td><td>否</td><td>否</td><td>否</td><td>否</td><td><strong>是</strong></td></tr>
+            <tr><td>本地维护与恢复</td><td>否</td><td>否</td><td>否</td><td>否</td><td>否</td><td>否</td><td><strong>是</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>结论</strong>：其他工具能安装 skill。<code>aweskill</code> 管理整个生命周期——发现、安装、组织、更新、维护、恢复——覆盖你使用的每一个 agent。</p>
+
+      <h2 id="scenarios">使用场景</h2>
+
+      <h3 id="scenario-1">场景 1：独立开发者中途切换 Agent</h3>
+
+      <p>你在 Claude Code 里开始写一个功能，做了一半切到 Cursor 写 UI，然后用 Codex 生成测试用例。三个 agent 都需要同样的 <code>pr-review</code> 和 <code>bug-triage</code> skill。</p>
+
+      <p><strong>没有 aweskill：</strong></p>
+      <ul>
+        <li>复制 <code>pr-review/SKILL.md</code> 到 <code>~/.claude/skills/pr-review/</code></li>
+        <li>再复制到 <code>~/.cursor/skills/pr-review/</code></li>
+        <li>再复制到 <code>~/.codex/skills/pr-review/</code></li>
+        <li>对 <code>bug-triage</code> 再来一遍</li>
+        <li>祈祷它们保持同步</li>
+      </ul>
+
+      <p><strong>用 aweskill：</strong></p>
+
+      <pre><code>aweskill agent add skill pr-review,bug-triage --global --agent claude-code
+aweskill agent add skill pr-review,bug-triage --global --agent cursor
+aweskill agent add skill pr-review,bug-triage --global --agent codex</code></pre>
+
+      <p>一个源头，三个投影，零冗余。</p>
+
+      <h3 id="scenario-2">场景 2：团队负责人构建标准 Skill 集</h3>
+
+      <p>团队同时使用 Claude Code 和 Cursor。你希望每个成员都有相同的核心 skill：代码审查、测试指南、API 设计规范、发布清单。</p>
+
+      <p><strong>没有 aweskill：</strong> 分享一个 Google Doc，列出需要手动安装哪些 skill。但每个人装出来的结果都不一样。</p>
+
+      <p><strong>用 aweskill：</strong></p>
+
+      <pre><code>aweskill bundle create team-standard
+aweskill bundle add team-standard pr-review,test-guidelines,api-design,release-checklist
+aweskill agent add bundle team-standard --global --agent claude-code
+aweskill agent add bundle team-standard --global --agent cursor</code></pre>
+
+      <p>每个团队成员跑同样的两条命令，就能获得完全一致的 skill 配置。Bundle 定义是一个简单的 YAML 文件，可以直接提交到共享仓库。</p>
+
+      <h3 id="scenario-3">场景 3：Skill 作者发布了更新</h3>
+
+      <p>你从 <code>skills.sh</code> 下载了一个 <code>security-review</code> skill。作者刚发布了改进版，覆盖了 OWASP 2025。</p>
+
+      <p><strong>没有 aweskill：</strong> 翻遍四个 agent 目录，下载新版本，手动替换每一份副本，祈祷没遗漏。</p>
+
+      <p><strong>用 aweskill：</strong></p>
+
+      <pre><code>aweskill update --check           # 查看哪些有更新
+aweskill update security-review   # 拉取更新到中央仓库</code></pre>
+
+      <p>所有已投影的 agent 自动获取更新——它们指向同一个中央副本。</p>
+
+      <h3 id="scenario-4">场景 4：科研人员使用科研类 Skill</h3>
+
+      <p>你在 <code>sciskillhub.org</code> 发现了一个蛋白质组学分析 skill，想同时在 Gemini CLI 和 Claude Code 里使用。</p>
+
+      <pre><code>aweskill find proteomics
+aweskill install sciskill:open-source/research/lifesciences-proteomics
+aweskill agent add skill lifesciences-proteomics --global --agent gemini-cli
+aweskill agent add skill lifesciences-proteomics --global --agent claude-code</code></pre>
+
+      <p>一次安装，多个 agent，来源已追踪。</p>
+
+      <h3 id="scenario-5">场景 5：灾难恢复</h3>
+
+      <p>一次 agent 更新清空了你的 <code>~/.cursor/skills/</code> 目录。你精心整理的所有 skill 全没了。</p>
+
+      <p><strong>没有 aweskill：</strong> 从头开始，重新下载所有内容，凭记忆重建整个配置。</p>
+
+      <p><strong>用 aweskill：</strong></p>
+
+      <pre><code>aweskill store backup                          # 你上周跑过这个
+aweskill store restore ~/Downloads/aweskill-backup.tar.gz
+aweskill agent add bundle daily-coding --global --agent cursor</code></pre>
+
+      <p>中央仓库恢复，Bundle 重新投影，继续工作。</p>
+
+      <h2 id="install-via-agent">直接让 Agent 帮你安装 aweskill</h2>
+
+      <p>这个工作流里最顺手的一点，是你不一定要自己手工完成引导。可以直接把安装协议交给当前 coding agent：</p>
+
+      <pre><code>Read https://github.com/mugpeng/aweskill/blob/main/README.ai.md and follow it to install aweskill.</code></pre>
+
+      <img src="/aweskill-agent-install-demo.png" alt="AI coding agent 按照 README.ai.md 安装 aweskill 并启用内置管理 skills 的示例截图。" />
+
+      <p>一次流程里，agent 就能完成 CLI 安装、central store 初始化、当前运行环境识别、<code>aweskill</code> 和 <code>aweskill-doctor</code> 投影，并在最后提醒你重启，让新 skills 正式生效。</p>
+
+      <h2 id="getting-started">快速开始</h2>
+
+      <p>安装：</p>
+      <pre><code>npm install -g aweskill
+aweskill store init</code></pre>
+
+      <p>查找并安装 skill：</p>
+      <pre><code>aweskill find pr-review
+aweskill install owner/repo</code></pre>
+
+      <p>投影到所有 agent：</p>
+      <pre><code>aweskill agent add skill pr-review --global --agent claude-code
+aweskill agent add skill pr-review --global --agent codex
+aweskill agent add skill pr-review --global --agent cursor
+aweskill agent add skill pr-review --global --agent gemini-cli</code></pre>
+
+      <p>或用 bundle 一次投影整组：</p>
+      <pre><code>aweskill bundle create daily-coding
+aweskill bundle add daily-coding pr-review,bug-triage,release-checklist
+aweskill agent add bundle daily-coding --global --agent claude-code
+aweskill agent add bundle daily-coding --global --agent cursor</code></pre>
+
+      <h2 id="other-tools">同类工具推荐</h2>
+
+      <p>如果你的核心诉求是"跨多个 agent 维护一套可修复、可恢复、可持续演进的本地 skills 资产"，<code>aweskill</code> 更合适。但这个生态里还有几类相邻工具，也值得了解：</p>
+
+      <ul>
+        <li><a href="https://github.com/iamzhihuix/skills-manage">skills-manage</a>：如果你偏好可视化管理，它提供了桌面 UI、中央技能库、marketplace 浏览、GitHub 导入、collections 和按平台安装等功能。</li>
+        <li><a href="https://github.com/farion1231/cc-switch">cc-switch</a>：如果你的主要痛点是切换不同 API 配置、模型入口和本地 AI 工具配置，而不是长期维护 skills，这个工具更对症。</li>
+        <li><a href="https://github.com/sciskillhub/sciskill">sciskill</a>：如果你主要想下载科研、生信方向的 skills，这个 registry 元数据仓库更有针对性。</li>
+        <li><a href="https://github.com/vercel-labs/skills">vercel-labs/skills</a>：如果你想从更流行、更开放的 skills 生态里挑选 skill，并借助 <code>skills.sh</code> 一类入口按热度和社区口碑来筛选，它是很好的起点。</li>
+      </ul>
+
+      <h2 id="agent-self-manage">让 AI Agent 自主管理 Skill</h2>
+
+      <p><code>aweskill</code> 自带两个内置元技能。先把它们投影到当前 agent：</p>
+
+      <pre><code>aweskill agent supported
+aweskill agent add skill aweskill,aweskill-doctor --global --agent codex
+aweskill agent list --global --agent codex</code></pre>
+
+      <p>把 <code>codex</code> 替换成你的 agent id。</p>
+
+      <p>你的 AI agent 可以响应这样的请求：</p>
+      <ul>
+        <li>"帮我给所有 agent 安装最新的 pr-review skill"</li>
+        <li>"检查一下有没有 skill 需要更新"</li>
+        <li>"清理仓库里的重复 skill"</li>
+        <li>"备份我的 skill 仓库"</li>
+      </ul>
+
+      <p>Agent 会代替你运行 <code>aweskill</code> 命令。这让 <code>aweskill</code> 从"你管理的工具"变成了"agent 可以自管理的工具"。</p>
+
+      <h2 id="47-agents">47 个 Agent，还在增加</h2>
+
+      <p><code>aweskill</code> 目前支持 <strong>47 个 AI 编码 agent</strong>：</p>
+
+      <p>Claude Code、Cursor、Windsurf、Codex、GitHub Copilot、Gemini CLI、OpenCode、Goose、Amp、Roo Code、Kiro CLI、Kilo Code、Trae、Cline、Antigravity、Droid、Augment、OpenClaw、CodeBuddy、Crush、Kode、Mistral Vibe、Mux、OpenClaude IDE、OpenHands、Qoder、Qwen Code、Replit、Neovate、AdaL 等等。</p>
+
+      <p>完整列表见 <a href="https://github.com/mugpeng/aweskill#supported-agents">README</a>。</p>
+
+      <h2 id="when-to-use">什么时候该用 aweskill</h2>
+
+      <p><strong>如果你符合以下情况：</strong></p>
+      <ul>
+        <li>同时使用多个 AI 编码 agent</li>
+        <li>希望有一个本地唯一的 skill 来源</li>
+        <li>需要在 Claude Code、Cursor、Codex、Gemini CLI 等之间共享 skill</li>
+        <li>想用 bundle 代替手工复制</li>
+        <li>在乎来源追踪更新和可恢复的本地状态</li>
+        <li>希望 AI agent 能通过自然语言管理 skill</li>
+      </ul>
+
+      <p><strong>你可能不需要，如果：</strong></p>
+      <ul>
+        <li>只用一个 agent，且不打算切换</li>
+        <li>安装一次 skill 后再也不动</li>
+      </ul>
+
+      <h2 id="summary">总结</h2>
+
+      <p>安装一个 skill 不是难题。让它始终保持更新、有条理、跨 agent 一致、出了问题还能恢复——这才是难题。</p>
+
+      <p><code>aweskill</code> 解决的是第三十天的问题。中央仓库、多 agent 投影、来源追踪更新、Bundle 组织、内置维护、Agent 可调用管理。</p>
+
+      <p>如果你同时在多个 AI agent 之间工作，<code>aweskill</code> 能把散落的 skill 文件夹变成真正可管理的东西。</p>
+
+      <hr />
+
+      <p><strong>官网</strong>：<a href="https://aweskill.webioinfo.top/">aweskill.webioinfo.top</a> &bull; <strong>立即安装</strong>：<code>npm install -g aweskill</code> &bull; <strong>GitHub</strong>：<a href="https://github.com/mugpeng/aweskill">mugpeng/aweskill</a></p>
+    </ArticleLayout>
+  </main>
+  <Footer t={t} />
+</Layout>

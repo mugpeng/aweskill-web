@@ -3,9 +3,11 @@ import type { i18n } from '../types';
 
 interface Props {
   t: i18n;
+  isArticle?: boolean;
 }
 
-const { t } = Astro.props;
+const { t, isArticle = false } = Astro.props;
+const langHref = isArticle ? t.langSwitchArticleHref : t.langSwitchHref;
 ---
 
 <header class="sticky top-0 z-50 backdrop-blur-md bg-[var(--color-bg)]/80 border-b border-[var(--color-outline)]">
@@ -15,11 +17,15 @@ const { t } = Astro.props;
       <span class="text-xl tracking-tight font-semibold">aweskill</span>
     </a>
     <nav class="flex items-center gap-3">
+      <a href={t.newsHref} class="px-2 py-1 text-sm font-medium text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors rounded-md hover:bg-[var(--color-surface)]">
+        {t.newsLabel}
+      </a>
+      <div class="w-px h-5 bg-[var(--color-outline)]"></div>
       <button id="theme-toggle" class="p-1.5 text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors" aria-label="Toggle theme">
         <svg class="w-5 h-5 hidden dark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="w-5 h-5 light-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a href={t.langSwitchHref} class="px-2 py-1 text-sm font-medium text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors rounded-md hover:bg-[var(--color-surface)]">
+      <a href={langHref} class="px-2 py-1 text-sm font-medium text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors rounded-md hover:bg-[var(--color-surface)]">
         {t.langSwitch}
       </a>
       <div class="w-px h-5 bg-[var(--color-outline)]"></div>

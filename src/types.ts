@@ -30,4 +30,7 @@ export interface i18n {
   footerReadme: string;
   copyButton: string;
   copiedButton: string;
+  newsLabel: string;
+  newsHref: string;
+  langSwitchArticleHref: string;
 }

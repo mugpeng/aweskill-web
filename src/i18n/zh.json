@@ -47,5 +47,8 @@
   "footerLicense": "MPL-2.0",
   "footerReadme": "说明文档",
   "copyButton": "复制",
-  "copiedButton": "已复制!"
+  "copiedButton": "已复制!",
+  "newsLabel": "动态",
+  "newsHref": "/zh/articles/stop-copying-skills",
+  "langSwitchArticleHref": "/articles/stop-copying-skills"
 }

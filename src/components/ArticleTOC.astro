@@ -1,0 +1,53 @@
+---
+interface Props {
+  headings: { id: string; text: string; level: number }[];
+}
+
+const { headings } = Astro.props;
+---
+
+<nav class="toc" aria-label="Table of contents">
+  <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-secondary)] mb-4">
+    On this page
+  </p>
+  <ul class="space-y-2 border-l border-[var(--color-outline)]">
+    {headings.map((h) => (
+      <li>
+        <a
+          href={`#${h.id}`}
+          class={`block text-sm transition-colors hover:text-[var(--color-on-surface)] toc-link ${
+            h.level === 3 ? 'pl-6' : 'pl-4'
+          } text-[var(--color-secondary)]`}
+          data-target={h.id}
+        >
+          {h.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  const links = document.querySelectorAll('.toc-link') as NodeListOf<HTMLAnchorElement>;
+  const sections = Array.from(links).map(l => document.getElementById(l.dataset.target!)).filter(Boolean) as HTMLElement[];
+
+  function updateActive() {
+    let current = '';
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= 120) {
+        current = section.id;
+      }
+    }
+    links.forEach(l => {
+      const isActive = l.dataset.target === current;
+      l.classList.toggle('text-[var(--color-accent)]', isActive);
+      l.classList.toggle('font-medium', isActive);
+      l.classList.toggle('border-l-2', isActive);
+      l.classList.toggle('-ml-[2px]', isActive);
+      l.classList.toggle('border-[var(--color-accent)]', isActive);
+    });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+</script>

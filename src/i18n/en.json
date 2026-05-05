@@ -47,5 +47,8 @@
   "footerLicense": "MPL-2.0",
   "footerReadme": "README",
   "copyButton": "Copy",
-  "copiedButton": "Copied!"
+  "copiedButton": "Copied!",
+  "newsLabel": "News",
+  "newsHref": "/articles/stop-copying-skills",
+  "langSwitchArticleHref": "/zh/articles/stop-copying-skills"
 }
