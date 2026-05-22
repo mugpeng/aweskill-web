@@ -51,6 +51,7 @@
   "copyButton": "复制",
   "copiedButton": "已复制！",
   "newsLabel": "动态",
+  "navHome": "首页",
   "newsHref": "/zh/articles",
   "langSwitchArticleHref": "/articles"
 }

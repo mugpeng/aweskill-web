@@ -33,6 +33,7 @@ export interface i18n {
   copyButton: string;
   copiedButton: string;
   newsLabel: string;
+  navHome: string;
   newsHref: string;
   langSwitchArticleHref: string;
 }

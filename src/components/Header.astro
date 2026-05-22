@@ -18,6 +18,10 @@ const langHref = langHrefOverride ?? (isArticle ? t.langSwitchArticleHref : t.la
       <span class="hidden sm:inline text-xl tracking-tight font-semibold">aweskill</span>
     </a>
     <nav class="flex items-center justify-end gap-1.5 sm:gap-3 min-w-0">
+      <a href={t.homeHref} class="px-1.5 sm:px-2 py-1 text-sm font-medium text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors rounded-md hover:bg-[var(--color-surface)]">
+        {t.navHome}
+      </a>
+      <div class="hidden min-[380px]:block w-px h-5 bg-[var(--color-outline)]"></div>
       <a href={t.newsHref} class="px-1.5 sm:px-2 py-1 text-sm font-medium text-[var(--color-secondary)] hover:text-[var(--color-on-surface)] transition-colors rounded-md hover:bg-[var(--color-surface)]">
         {t.newsLabel}
       </a>

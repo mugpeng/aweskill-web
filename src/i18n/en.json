@@ -51,6 +51,7 @@
   "copyButton": "Copy",
   "copiedButton": "Copied!",
   "newsLabel": "News",
+  "navHome": "Home",
   "newsHref": "/articles",
   "langSwitchArticleHref": "/zh/articles"
 }
