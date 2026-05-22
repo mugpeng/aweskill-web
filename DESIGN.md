@@ -18,34 +18,34 @@ colors:
   light-outline: "#E2E8F0"
 typography:
   display-lg:
-    fontFamily: Inter, system-ui, sans-serif
+    fontFamily: Sora, system-ui, sans-serif
     fontSize: 48px
     fontWeight: "700"
     lineHeight: 56px
     letterSpacing: -0.02em
   headline-lg:
-    fontFamily: Inter, system-ui, sans-serif
+    fontFamily: Sora, system-ui, sans-serif
     fontSize: 32px
     fontWeight: "600"
     lineHeight: 40px
     letterSpacing: -0.01em
   headline-md:
-    fontFamily: Inter, system-ui, sans-serif
+    fontFamily: Sora, system-ui, sans-serif
     fontSize: 24px
     fontWeight: "600"
     lineHeight: 32px
   body-lg:
-    fontFamily: Inter, system-ui, sans-serif
+    fontFamily: Sora, system-ui, sans-serif
     fontSize: 18px
     fontWeight: "400"
     lineHeight: 28px
   body-md:
-    fontFamily: Inter, system-ui, sans-serif
+    fontFamily: Sora, system-ui, sans-serif
     fontSize: 16px
     fontWeight: "400"
     lineHeight: 24px
   label-sm:
-    fontFamily: Inter, system-ui, sans-serif
+    fontFamily: Sora, system-ui, sans-serif
     fontSize: 12px
     fontWeight: "600"
     lineHeight: 16px
@@ -116,7 +116,7 @@ Light mode uses the same hue family inverted: cool white background, dark blue-b
 
 ## Typography
 
-Inter for all body text — modern, highly legible at all sizes, excellent for developer tools. JetBrains Mono for code blocks — distinct character shapes, ligature support, recognized by developers.
+Sora for all text — geometric, modern, excellent legibility at all sizes. Clean and technical without being cold. JetBrains Mono for code blocks — distinct character shapes, ligature support, recognized by developers.
 
 ## Layout
 
