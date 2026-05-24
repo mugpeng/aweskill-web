@@ -11,7 +11,6 @@
   "aiLabel": "For AI Agents",
   "humanInstall": "npm install -g aweskill",
   "aiInstall": "Read https://github.com/mugpeng/aweskill/blob/main/README.ai.md and follow it to install aweskill.",
-  "badgeVersion": "",
   "badgeNode": "Node ≥20",
   "badgeLicense": "MPL-2.0",
   "badgeAgents": "47 Agents",

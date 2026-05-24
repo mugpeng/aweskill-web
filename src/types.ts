@@ -11,7 +11,6 @@ export interface i18n {
   aiLabel: string;
   humanInstall: string;
   aiInstall: string;
-  badgeVersion: string;
   badgeNode: string;
   badgeLicense: string;
   badgeAgents: string;

@@ -8,10 +8,6 @@ import Agents from '../components/Agents.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import t from '../i18n/en.json';
-
-const res = await fetch('https://registry.npmjs.org/aweskill/latest');
-const pkg = await res.json();
-t.badgeVersion = `v${pkg.version}`;
 ---
 
 <Layout lang="en" title="aweskill — Skill Package Manager for AI Agents" description="CLI-first skill package manager that AI agents can operate themselves. One install, many coding agents.">
