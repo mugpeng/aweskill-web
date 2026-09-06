@@ -49,8 +49,5 @@
   "footerReadmeHref": "https://github.com/mugpeng/aweskill/blob/main/README.zh-CN.md",
   "copyButton": "复制",
   "copiedButton": "已复制！",
-  "newsLabel": "动态",
-  "navHome": "首页",
-  "newsHref": "/zh/articles",
-  "langSwitchArticleHref": "/articles"
+  "navHome": "首页"
 }

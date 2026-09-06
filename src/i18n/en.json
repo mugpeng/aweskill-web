@@ -49,8 +49,5 @@
   "footerReadmeHref": "https://github.com/mugpeng/aweskill/blob/main/README.md",
   "copyButton": "Copy",
   "copiedButton": "Copied!",
-  "newsLabel": "News",
-  "navHome": "Home",
-  "newsHref": "/articles",
-  "langSwitchArticleHref": "/zh/articles"
+  "navHome": "Home"
 }
