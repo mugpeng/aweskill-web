@@ -1,8 +1,8 @@
 # aweskill-web
 
-Official website for [aweskill](https://github.com/mugpeng/aweskill) — a CLI-first skill package manager for AI agents.
+Official website for [aweskill](https://github.com/wehuman01/aweskill) — a CLI-first skill package manager for AI agents.
 
-**Live site:** [aweskill.webioinfo.top](https://aweskill.webioinfo.top)
+**Live site:** [aweskill.wehuman.top](https://aweskill.wehuman.top)
 
 ## About
 

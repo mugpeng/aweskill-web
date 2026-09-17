@@ -10,7 +10,7 @@
   "humanLabel": "For Humans",
   "aiLabel": "For AI Agents",
   "humanInstall": "npm install -g aweskill",
-  "aiInstall": "Read https://github.com/mugpeng/aweskill/blob/main/README.ai.md and follow it to install aweskill.",
+  "aiInstall": "Read https://github.com/wehuman01/aweskill/blob/main/README.ai.md and follow it to install aweskill.",
   "badgeNode": "Node ≥20",
   "badgeLicense": "MPL-2.0",
   "badgeAgents": "47 Agents",
@@ -46,7 +46,7 @@
   "footernpm": "npm",
   "footerLicense": "MPL-2.0",
   "footerReadme": "README",
-  "footerReadmeHref": "https://github.com/mugpeng/aweskill/blob/main/README.md",
+  "footerReadmeHref": "https://github.com/wehuman01/aweskill/blob/main/README.md",
   "copyButton": "Copy",
   "copiedButton": "Copied!",
   "navHome": "Home"

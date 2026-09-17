@@ -1,8 +1,8 @@
 # aweskill-web
 
-[aweskill](https://github.com/mugpeng/aweskill) 的官方网站——一个为 AI agents 设计的 CLI-first skill package manager。
+[aweskill](https://github.com/wehuman01/aweskill) 的官方网站——一个为 AI agents 设计的 CLI-first skill package manager。
 
-**站点地址：** [aweskill.webioinfo.top](https://aweskill.webioinfo.top)
+**站点地址：** [aweskill.wehuman.top](https://aweskill.wehuman.top)
 
 ## 关于
 

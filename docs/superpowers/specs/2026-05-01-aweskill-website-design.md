@@ -50,7 +50,7 @@ website/
 - Subtitle: "Skill Package Manager for AI Agents" / "AI Agent 的技能包管理器"
 - Two install boxes side by side:
   - **Human:** terminal-style code block with `npm install -g aweskill` + copy button
-  - **AI Agent:** `Read https://github.com/mugpeng/aweskill/blob/main/README.ai.md` + copy button
+  - **AI Agent:** `Read https://github.com/wehuman01/aweskill/blob/main/README.ai.md` + copy button
 - Badge row: version / node / license / 47 agents
 
 ### Features

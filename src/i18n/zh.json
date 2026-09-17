@@ -10,7 +10,7 @@
   "humanLabel": "手动安装",
   "aiLabel": "让 AI Agent 安装",
   "humanInstall": "npm install -g aweskill",
-  "aiInstall": "读取 https://github.com/mugpeng/aweskill/blob/main/README.ai.md，并按照说明为当前 Agent 安装 aweskill。",
+  "aiInstall": "读取 https://github.com/wehuman01/aweskill/blob/main/README.ai.md，并按照说明为当前 Agent 安装 aweskill。",
   "badgeNode": "Node ≥20",
   "badgeLicense": "MPL-2.0",
   "badgeAgents": "47 个 Agent",
@@ -46,7 +46,7 @@
   "footernpm": "npm",
   "footerLicense": "MPL-2.0",
   "footerReadme": "中文 README",
-  "footerReadmeHref": "https://github.com/mugpeng/aweskill/blob/main/README.zh-CN.md",
+  "footerReadmeHref": "https://github.com/wehuman01/aweskill/blob/main/README.zh-CN.md",
   "copyButton": "复制",
   "copiedButton": "已复制！",
   "navHome": "首页"

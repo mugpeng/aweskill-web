@@ -8,7 +8,7 @@ Make sure you have Node.js 18+ and npm installed.
 
 ```bash
 # Clone the repo
-git clone https://github.com/mugpeng/aweskill.git
+git clone https://github.com/wehuman01/aweskill.git
 cd aweskill/aweskill-web
 
 # Install dependencies
